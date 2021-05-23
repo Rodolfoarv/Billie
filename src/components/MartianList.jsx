@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import martianCustomersData from "./martianCustomers";
+import cleanMartianData from "../utils/cleanMartianData";
 
 const MartianList = () => {
 
   const [martianCustomers, setMartianCustomers] = useState([]);
-  console.log(martianCustomers);
 
   useEffect(() => {
-    setMartianCustomers(martianCustomersData);
+    let cleanCustomerData = cleanMartianData(martianCustomersData);
+    setMartianCustomers(cleanCustomerData);
   }, [])
   
   return(
