@@ -26,7 +26,7 @@ const MartianList = () => {
               color='primary'
               onClick={() => {
                 setIsModalOpen(true);
-                setSelectedCustomer(customer);
+                setSelectedCustomer(index);
               }}>
               {customer.name}
             </Button>
@@ -41,7 +41,7 @@ const MartianList = () => {
         }}
         aria-labelledby='simple-modal-title'
         aria-describedby='simple-modal-description'>
-        <MartianModalContent customer={selectedCustomer} />
+        <MartianModalContent martianCustomers={martianCustomers} currentCustomer={selectedCustomer} />
       </Modal>
     </>
   );
