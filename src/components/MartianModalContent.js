@@ -33,6 +33,7 @@ const MartianModalContent = ({ martianCustomers, currentCustomer }) => {
   const customer = martianCustomers[currentCustomer];
   const [newBudget, setNewBudget] = useState(customer.budget);
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+  const [showErrorAlert, setShowErrorAlert] = useState(false);
 
   // Styling
   const classes = useStyles();
@@ -40,16 +41,34 @@ const MartianModalContent = ({ martianCustomers, currentCustomer }) => {
 
   const modifyBudget = (event) => {
     event.preventDefault();
-    customer.budget = newBudget;
-    setShowSuccessAlert(true);
+    if (newBudget > 0) {
+      customer.budget = newBudget;
+      setShowSuccessAlert(true);
+      setShowErrorAlert(false);
+    } else {
+      setShowErrorAlert(true);
+      setShowSuccessAlert(false);
+    }
   };
 
   return (
     <>
       <div style={modalStyle} className={classes.paper}>
         {showSuccessAlert ? (
-          <Alert onClose={() => setShowSuccessAlert(false)}>
-            The budget has been updated! Shall we get a martian dog?{" "}
+          <Alert onClose={() => setShowSuccessAlert(false)} severity='success'>
+            <h3>The budget has been updated! Shall we get a martian dog? </h3>
+          </Alert>
+        ) : (
+          <> </>
+        )}
+
+        {showErrorAlert ? (
+          <Alert onClose={() => setShowErrorAlert(false)} severity='error'>
+            <h3>
+              {" "}
+              There are no negative numbers for us martians. (Budget should be
+              positive){" "}
+            </h3>
           </Alert>
         ) : (
           <> </>
@@ -59,8 +78,13 @@ const MartianModalContent = ({ martianCustomers, currentCustomer }) => {
         <div id='description'>
           <form id='budgetForm' onSubmit={modifyBudget}>
             <Input
+              name='budgetField'
+              inputProps={{
+                pattern: "[0-9]*",
+              }}
               color='primary'
               defaultValue={newBudget}
+              type='number'
               onChange={(e) => {
                 setNewBudget(e.target.value);
               }}></Input>
@@ -71,7 +95,6 @@ const MartianModalContent = ({ martianCustomers, currentCustomer }) => {
           </form>
           <p>Date of first purchase: {customer.date_of_first_purchase}</p>
 
-          <h3></h3>
           <p>Total budget: {customer.budget}</p>
           <p>Budget spent: {customer.budget_spent}</p>
           <p>Budget left: {customer.budget - customer.budget_spent}</p>
