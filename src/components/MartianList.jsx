@@ -38,7 +38,7 @@ const MartianList = () => {
                     image={customer.image}
                     title={customer.name}
                   />
-                  <CardContent>
+                  <CardContent >
                     <Typography gutterBottom variant='h5' component='h2'>
                       {customer.name}
                     </Typography>

@@ -8,11 +8,12 @@ function rand() {
 }
 
 function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
+  const top = 50;
+  const left = 50;
 
   return {
     top: `${top}%`,
+    margin:'auto',
     left: `${left}%`,
     transform: `translate(-${top}%, -${left}%)`,
   };
@@ -21,12 +22,18 @@ function getModalStyle() {
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: "absolute",
-    width: 400,
+    width: theme.spacing.unit * 50,
     backgroundColor: theme.palette.background.paper,
     border: "2px solid #000",
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
+    padding: theme.spacing.unit * 4,
   },
+
+  modifyBudgetButton: {
+    marginLeft: 30
+  }
+
+
 }));
 
 const MartianModalContent = ({ martianCustomers, currentCustomer }) => {
@@ -89,15 +96,10 @@ const MartianModalContent = ({ martianCustomers, currentCustomer }) => {
                 setNewBudget(e.target.value);
               }}></Input>
 
-            <Button type='submit' variant='contained' color='primary'>
+            <Button type='submit' variant='contained' color='primary' className={classes.modifyBudgetButton}>
               Change Budget
             </Button>
           </form>
-          <p>Date of first purchase: {customer.date_of_first_purchase}</p>
-
-          <p>Total budget: {customer.budget}</p>
-          <p>Budget spent: {customer.budget_spent}</p>
-          <p>Budget left: {customer.budget - customer.budget_spent}</p>
         </div>
       </div>
     </>
