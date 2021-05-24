@@ -36,3 +36,22 @@
     transform: rotate(360deg);
   }
 }
+
+.martianCard {
+  max-width: 345px;
+}
+
+.martianMedia {
+  height: 400px;
+}
+
+.editBudgetButton {
+  text-align: center;
+  align-content: center;
+}
+
+.grid {
+  padding-top: 50px;
+  padding-left: 20%;
+  padding-right: 20%;
+}
