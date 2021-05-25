@@ -1,4 +1,4 @@
-# Comtravo Challenge
+# Billie Challenge
 
 This project hosts the solution for Billie's Frontend Challenge :)
 
@@ -7,6 +7,12 @@ In it I will describe the process of how I decided to solve the problem, the tec
 Feel free to use the project as you like and to switch to any PR to see the development of any particular feature, if there is any question feel free to hit me up.
 
 I divided the project into PRs to see each feature being developed independently, think of them as tickets or just to isolate each feature in case we need to revert it.
+
+# Demo
+
+You can find the demo online at:
+
+https://billiechallenge.netlify.app/
 
 ![Billie](demo.gif)
 
@@ -27,6 +33,7 @@ companies
 - ADDED Testing
 - ADDED Validation for budget
 - ADDED displaying success and error message when updating budget
+- CI/CD for website hosted in Netlify
 
 # How did I decide to tackle the problem?
 
