@@ -3,10 +3,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Input, Button } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
-
 function getModalStyle() {
   const top = 50;
   const left = 50;
@@ -22,11 +18,11 @@ function getModalStyle() {
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: "absolute",
-    width: theme.spacing.unit * 50,
+    width: theme.spacing(50),
     backgroundColor: theme.palette.background.paper,
     border: "2px solid #000",
     boxShadow: theme.shadows[5],
-    padding: theme.spacing.unit * 4,
+    padding: theme.spacing(4),
   },
 
   modifyBudgetButton: {
@@ -36,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-const MartianModalContent = ({ martianCustomers, currentCustomer }) => {
+const MartianModalContent = React.forwardRef(({ martianCustomers, currentCustomer }, ref) => {
   const customer = martianCustomers[currentCustomer];
   const [newBudget, setNewBudget] = useState(customer.budget);
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
@@ -90,7 +86,7 @@ const MartianModalContent = ({ martianCustomers, currentCustomer }) => {
                 pattern: "[0-9]*",
               }}
               color='primary'
-              defaultValue={newBudget}
+              value={newBudget}
               type='number'
               onChange={(e) => {
                 setNewBudget(e.target.value);
@@ -104,6 +100,6 @@ const MartianModalContent = ({ martianCustomers, currentCustomer }) => {
       </div>
     </>
   );
-};
+});
 
 export default MartianModalContent;

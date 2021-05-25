@@ -15,7 +15,7 @@ import martianCustomersData from "./martianCustomersData";
 import cleanMartianData from "../utils/cleanMartianData";
 import MartianModalContent from "./MartianModalContent";
 
-const MartianList = () => {
+const MartianList = React.forwardRef((props, ref) => {
   const [martianCustomers, setMartianCustomers] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedCustomer, setSelectedCustomer] = useState({});
@@ -26,11 +26,11 @@ const MartianList = () => {
   }, []);
 
   return (
-    <div>
-      <Grid container spacing={3} className="grid" >
+    <div ref={ref}>
+      <Grid container spacing={3} className='grid'>
         {martianCustomers.map((customer, index) => {
           return (
-            <Grid item xs={4}  key={index}>
+            <Grid item xs={4} key={index}>
               <Card className='martianCard'>
                 <CardActionArea>
                   <CardMedia
@@ -38,7 +38,7 @@ const MartianList = () => {
                     image={customer.image}
                     title={customer.name}
                   />
-                  <CardContent >
+                  <CardContent>
                     <Typography gutterBottom variant='h5' component='h2'>
                       {customer.name}
                     </Typography>
@@ -77,7 +77,7 @@ const MartianList = () => {
                     color='primary'
                     variant='contained'
                     className='editBudgetButton'
-                    fullWidth='true'
+                    fullWidth={true}
                     onClick={() => {
                       setIsModalOpen(true);
                       setSelectedCustomer(index);
@@ -105,6 +105,6 @@ const MartianList = () => {
       </Modal>
     </div>
   );
-};
+});
 
 export default MartianList;
