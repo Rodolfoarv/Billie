@@ -37,6 +37,7 @@ const MartianModalContent = React.forwardRef(({ martianCustomers, currentCustome
   const [newBudget, setNewBudget] = useState(customer.budget);
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [showErrorAlert, setShowErrorAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState(""); 
 
   // Styling
   const classes = useStyles();
@@ -44,13 +45,21 @@ const MartianModalContent = React.forwardRef(({ martianCustomers, currentCustome
 
   const modifyBudget = (event) => {
     event.preventDefault();
-    if (newBudget > 0) {
-      customer.budget = newBudget;
-      setShowSuccessAlert(true);
-      setShowErrorAlert(false);
-    } else {
+
+    if (newBudget < 0){
+      setAlertMessage("There are no negative numbers for us martians. (Budget should be positive)");
       setShowErrorAlert(true);
       setShowSuccessAlert(false);
+      
+    }else if (newBudget < customer.budget_spent){
+      setAlertMessage("Your new budget cannot be less than what you have spent");
+      setShowErrorAlert(true);
+      setShowSuccessAlert(false);
+    }else{
+      customer.budget = newBudget;
+      setAlertMessage("The budget has been updated! Shall we get a martian dog?");
+      setShowSuccessAlert(true);
+      setShowErrorAlert(false);
     }
   };
 
@@ -59,7 +68,7 @@ const MartianModalContent = React.forwardRef(({ martianCustomers, currentCustome
       <div style={modalStyle} className={classes.paper}>
         {showSuccessAlert ? (
           <Alert onClose={() => setShowSuccessAlert(false)} severity='success'>
-            <h3>The budget has been updated! Shall we get a martian dog? </h3>
+            <h3>{alertMessage} </h3>
           </Alert>
         ) : (
           <> </>
@@ -68,9 +77,7 @@ const MartianModalContent = React.forwardRef(({ martianCustomers, currentCustome
         {showErrorAlert ? (
           <Alert onClose={() => setShowErrorAlert(false)} severity='error'>
             <h3>
-              {" "}
-              There are no negative numbers for us martians. (Budget should be
-              positive){" "}
+              {alertMessage}
             </h3>
           </Alert>
         ) : (
